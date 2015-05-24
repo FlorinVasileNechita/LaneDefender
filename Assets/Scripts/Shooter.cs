@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Shooter : MonoBehaviour {
 
-	public GameObject projectile, projectileParent, spawnLocation;
-
+	public GameObject projectile, spawnLocation;
+	private GameObject projectileParent;
 	void Start () {
-		if (!projectile) {
-			Debug.LogError("Projectile not attached to " + name); 
+
+		projectileParent = GameObject.Find ("Projectiles");
+
+		if (!projectileParent) {
+			projectileParent = new GameObject("Projectiles");
 		}
 	}
 	
