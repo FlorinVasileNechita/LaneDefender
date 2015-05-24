@@ -12,4 +12,8 @@ public class Defender : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		
+	}
 }
