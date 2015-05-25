@@ -16,7 +16,8 @@ public class SpawnScript : MonoBehaviour {
 	}
 
 	bool isTimeToSpawn(GameObject thisAttacker) {
-		float threshold = (thisAttacker.GetComponent<Attacker> ().frequency) * Time.deltaTime; 
+		float spawnsPerSecond = 1 / (thisAttacker.GetComponent<Attacker> ().frequency);
+		float threshold = spawnsPerSecond * Time.deltaTime / 5; 
 		// frequency in actual seconds.
 		return (Random.value < threshold); // using random.value as a probability.
 	}
