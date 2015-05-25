@@ -4,6 +4,7 @@ using System.Collections;
 public class DefenderSpawner : MonoBehaviour {
 
 	private GameObject parent;
+	private StarDisplay starDisplay;
 
 	void Start() {
 		parent = GameObject.Find ("Defenders");
@@ -11,9 +12,20 @@ public class DefenderSpawner : MonoBehaviour {
 		if (!parent) {
 			parent = new GameObject("Defenders");
 		}
+
+		starDisplay = GameObject.FindObjectOfType<StarDisplay> ();
 	}
 
 	void OnMouseDown() {
+		StarDisplay.Status status = starDisplay.SpendStars(ButtonScript.selectedDefender.GetComponent<Defender>().cost);
+		if (status == StarDisplay.Status.SUCCESS) {
+			SpawnDefender ();
+		} else {
+			Debug.Log ("Insufficient stars!");
+		}
+	}
+
+	void SpawnDefender() {
 		float x, y;
 		x = Input.mousePosition.x;
 		y = Input.mousePosition.y;
