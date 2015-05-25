@@ -3,6 +3,16 @@ using System.Collections;
 
 public class DefenderSpawner : MonoBehaviour {
 
+	private GameObject parent;
+
+	void Start() {
+		parent = GameObject.Find ("Defenders");
+		   
+		if (!parent) {
+			parent = new GameObject("Defenders");
+		}
+	}
+
 	void OnMouseDown() {
 		float x, y;
 		x = Input.mousePosition.x;
@@ -10,6 +20,7 @@ public class DefenderSpawner : MonoBehaviour {
 		Vector2 worldPos = Camera.main.ScreenToWorldPoint (new Vector3(x, y, 0f));
 		worldPos.x = Mathf.RoundToInt (worldPos.x);
 		worldPos.y = Mathf.RoundToInt (worldPos.y);
-		Instantiate (ButtonScript.selectedDefender, worldPos, Quaternion.identity);
+		GameObject spawn = Instantiate (ButtonScript.selectedDefender, worldPos, Quaternion.identity) as GameObject;
+		spawn.transform.parent = parent.transform;
 	}
 }
